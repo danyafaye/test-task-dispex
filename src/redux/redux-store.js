@@ -1,4 +1,8 @@
-import {combineReducers, createStore } from "redux"
+import {combineReducers, createStore, applyMiddleware} from "redux"
+import addressReducer from "./addressReducer";
+import clientListReducer from "./clientListReducer";
+import clientManagementReducer from "./clientManagementReducer";
+import thunkMiddleware from "redux-thunk"
 
 let reducers = combineReducers(
     {
@@ -8,5 +12,5 @@ let reducers = combineReducers(
     }
 )
 
-const store = createStore(reducers)
+const store = createStore(reducers, applyMiddleware(thunkMiddleware))
 export default store;
