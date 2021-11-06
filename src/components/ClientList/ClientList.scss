@@ -1,0 +1,24 @@
+.app-clients{
+  position: relative;
+  margin: 10px 0 0 0;
+  height: 62vh;
+  overflow: auto;
+}
+.app-clients-card{
+  display: inline-block;
+  width: 18vw;
+
+}
+.app-clients-phone{
+  color:green;
+}
+.app-clients-name{
+  font-weight: bold;
+}
+.app-clients-email{
+  color:gray;
+}
+.app-clients-buttons{
+  position: relative;
+  background-color: lightgray;
+}

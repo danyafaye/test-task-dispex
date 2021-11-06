@@ -2,11 +2,12 @@ import {Select} from "antd";
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {requestHouseFlats, requestHouses, requestStreets} from "../../redux/addressReducer";
-import "./Address.css"
+import "./AddressAndClientList.css"
+import ClientList from "../ClientList/ClientList";
 
 const {Option} = Select;
 
-const Address = () => {
+const AddressAndClientList = () => {
     const dispatch = useDispatch();
     const [streetId, setStreetId] = useState("");
     const [streetName, setStreetName] = useState("");
@@ -22,11 +23,10 @@ const Address = () => {
     const streets = useSelector(state => state.address.streets);
     const houses = useSelector(state => state.address.houses);
     const houseFlats = useSelector(state => state.address.houseFlats);
-    return <div className="app-address">
+    return <div className="app-address-clients">
         <p>
             Адрес
         </p>
-
         <Select showSearch
             style={{width: 200}}
             placeholder="Улица"
@@ -78,7 +78,9 @@ const Address = () => {
             {houseNumber? <span>, {houseNumber}</span> : ""}
             {houseFlatNumber ? <span>, {houseFlatNumber}</span> : ""}
         </p>
+        <ClientList houseFlatId={houseFlatId}/>
     </div>
+
 }
 
-export default Address;
+export default AddressAndClientList;

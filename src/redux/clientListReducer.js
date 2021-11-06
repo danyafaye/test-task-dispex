@@ -3,11 +3,7 @@ import {clientListApi} from "../api/clientlist-api";
 const CLIENTS_CLIENTLIST = 'CLIENTS/CLIENTLIST';
 
 let initialState = {
-    id: 0,
-    name: "",
-    phone: "",
-    email: "",
-    bindId: 0
+    clients: []
 }
 
 const clientListReducer = (state = initialState, action) => {
@@ -15,10 +11,7 @@ const clientListReducer = (state = initialState, action) => {
         case CLIENTS_CLIENTLIST:
         return{
             ...state,
-            name: action.data.Name,
-            phone: action.data.Phone,
-            email: action.data.Email
-
+            clients: action.data
         }
     default:
         return state;
