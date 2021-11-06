@@ -74,9 +74,9 @@ const Address = () => {
             {houseFlats.map(key => <Option key={key.id} value={key.name}>{key.name}</Option>)}
         </Select>
         <p className="app-address-street">
-            <span>ул. {streetName} </span>
-            <span>{houseNumber} </span>
-            <span>{houseFlatNumber}</span>
+            {streetName? <span>ул. {streetName}</span> : ""}
+            {houseNumber? <span>, {houseNumber}</span> : ""}
+            {houseFlatNumber ? <span>, {houseFlatNumber}</span> : ""}
         </p>
     </div>
 }
