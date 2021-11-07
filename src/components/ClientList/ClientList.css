@@ -1,12 +1,11 @@
 .app-clients {
   position: relative;
-  margin: 10px 0 0 0;
+  margin: 20px 0 0 0;
   height: 62vh;
   overflow: auto;
 }
 
 .app-clients-card {
-  display: inline-block;
   width: 18vw;
 }
 

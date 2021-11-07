@@ -1,8 +1,6 @@
 import React from "react";
 import './styles/App.css';
 import AddressAndClientList from "./components/Address/AddressAndClientList";
-import {Route, Routes} from "react-router-dom";
-import ClientManagement from "./components/ClientManagement/ClientManagement";
 import 'antd/dist/antd.css';
 import {Layout} from "antd";
 
@@ -15,9 +13,6 @@ const App = () => {
                 <Content style={{padding: '0 50px'}}>
                     <div className="site-layout-content">
                         <AddressAndClientList/>
-                        <Routes>
-                        <Route path="/clientmanagement" render={() => <ClientManagement/>}/>
-                        </Routes>
                     </div>
                 </Content>
                 <Footer></Footer>

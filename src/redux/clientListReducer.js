@@ -17,17 +17,14 @@ const clientListReducer = (state = initialState, action) => {
         return state;
 }}
 
-
 //action creator
 const actions = {
     setClientList: (data) => ({type: 'CLIENTS/CLIENTLIST', data}),
 }
 
 //thunk creator
-export const getClientList = (addressId = 0) => {
-    return async(dispatch)=>{
+export const getClientList = (addressId = 0) => async(dispatch)=>{
         let data = await clientListApi.getClientList(addressId);
         dispatch(actions.setClientList(data));
-    }
 }
 export default clientListReducer;

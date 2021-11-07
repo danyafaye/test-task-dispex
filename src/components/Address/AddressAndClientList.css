@@ -1,5 +1,11 @@
 .app-address-street {
   margin: 15px 0 0 0;
+  font-weight: bold;
+}
+
+.app-phone-text:before {
+  content: "*";
+  color: red;
 }
 
 /*# sourceMappingURL=AddressAndClientList.css.map */

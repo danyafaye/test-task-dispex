@@ -1,21 +1,25 @@
 import {clientManagementApi} from "../api/clientmanagement-api";
+import {getClientList} from "./clientListReducer";
 
 const CLIENTS_SET_CLIENT_ADDED = 'CLIENTS/SET_CLIENT_ADDED'
 
 let initialState = {
-    id:0,
+    id: 0,
     Name: "",
     Phone: "",
     Email: ""
 }
 
 const clientManagementReducer = (state = initialState, action) => {
-    switch(action.type) {
-        case CLIENTS_SET_CLIENT_ADDED:
-            return{
+    switch (action.type) {
+        /*case CLIENTS_SET_CLIENT_ADDED:
+            return {
                 ...state,
-                ...action.payload
-            }
+                id: action.id,
+                Phone: action.phone,
+                Email: action.email,
+                Name: action.name
+            }*/
         default:
             return state;
     }
@@ -23,14 +27,18 @@ const clientManagementReducer = (state = initialState, action) => {
 
 //action creator
 const actions = {
-    setClientAdded: (id, phone, email, name) => ({type: 'CLIENTS/SET_CLIENT_ADDED', payload:{id, phone, email, name}}),
+    /*setClientAdded: (id, phone, email, name) =>
+        ({type: 'CLIENTS/SET_CLIENT_ADDED', payload: {id, phone, email, name}})*/
 }
 
 //thunk creator
-export const getClientList = (phone, email, name) => {
-    return async(dispatch)=>{
-        let data = await clientManagementApi.addClient(phone, email, name);
-        dispatch(actions.setClientList(data.id, phone, email, name));
-    }
+export const bindClient = (addressId, id) => async (dispatch) => {
+    await clientManagementApi.bindClient(addressId, id)
+    dispatch(getClientList(addressId))
 }
+export const addClient = (id = 0, phone, email, name, addressId) => async (dispatch) => {
+    let data = await clientManagementApi.addClient(id, phone, email, name, 0);
+    dispatch(bindClient(addressId, data.id));
+}
+
 export default clientManagementReducer;

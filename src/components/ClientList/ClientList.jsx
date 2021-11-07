@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {getClientList} from "../../redux/clientListReducer";
-import {Card} from "antd";
+import {Card, Col, Row} from "antd";
 import {DeleteOutlined, EditOutlined, MailOutlined, PhoneOutlined, UserOutlined} from "@ant-design/icons";
 import "./ClientList.css"
 
@@ -13,13 +13,18 @@ const ClientList = (props) => {
     }, [props.houseFlatId])
     return (
         <div className="app-clients">
-            {clientListState.map(key => <Card hoverable className="app-clients-card" style={{margin: 10}}
-                                              actions={[<DeleteOutlined/>, <EditOutlined key="edit"/>]}>
-                <UserOutlined/>
-                <p key={key.id} className="app-clients-name">{key.name}</p>
-                <p key={key.id} className="app-clients-phone"><PhoneOutlined/> {key.phone}</p>
-                <p key={key.id} className="app-clients-email"><MailOutlined/> {key.email}</p>
-            </Card>)}
+            <Row>
+                {clientListState.map(key => <Col span={6} key={key.id}><Card hoverable className="app-clients-card"
+                                                                             style={{margin: 10}}
+                                                                             actions={[<DeleteOutlined/>,
+                                                                                 <EditOutlined key="edit"/>]}>
+                    <UserOutlined/>
+                    {key.name ? <p className="app-clients-name">{key.name}</p> : ""}
+                    {key.phone ? <p className="app-clients-phone"><PhoneOutlined/> {key.phone}</p> : ""}
+                    {key.email ? <p className="app-clients-email"><MailOutlined/> {key.email}</p> : ""}
+                </Card>
+                </Col>)}
+            </Row>
         </div>
     )
 }
