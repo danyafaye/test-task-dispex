@@ -10,11 +10,16 @@ import {
     UserOutlined
 } from "@ant-design/icons";
 import "./ClientList.css"
-import {addClient, deleteClient} from "../../redux/clientManagementReducer";
+import {addClient, deleteClient} from "../../redux/clientManagementThunk";
+
+//todo:refactor repeated code
 
 const ClientList = (props) => {
     const [visible, setVisible] = useState(false);
     const [confirmLoading, setConfirmLoading] = useState(false);
+    const [editPhoneNumber, setEditPhoneNumber] = useState("");
+    const [editEmail, setEditEmail] = useState("");
+    const [editClientName, setEditClientName] = useState("");
     const clientListState = useSelector(state => state.clientList.clients)
     const dispatch = useDispatch();
     useEffect(() => {
@@ -23,14 +28,24 @@ const ClientList = (props) => {
     const editClick = () => {
         setVisible(true);
     };
-    const handleOk = () => {
+    const handleOk = (bindId) => {
+        dispatch(addClient(0, editPhoneNumber, editEmail, editClientName, props.houseFlatId))
+        dispatch(deleteClient(props.houseFlatId, bindId))
         setConfirmLoading(true);
         setTimeout(() => {
             setVisible(false);
             setConfirmLoading(false);
         }, 2000);
     };
-
+    const editPhoneChange = (e) => {
+        setEditPhoneNumber(e.target.value);
+    }
+    const editEmailChange = (e) => {
+        setEditEmail(e.target.value);
+    }
+    const editClientNameChange = (e) => {
+        setEditClientName(e.target.value);
+    }
     const handleCancel = () => {
         setVisible(false);
     };
@@ -54,7 +69,7 @@ const ClientList = (props) => {
                         <Modal centered
                                title="Изменить информацию о жильце"
                                visible={visible}
-                               onOk={handleOk}
+                               onOk={()=>handleOk(key.bindId)}
                                confirmLoading={confirmLoading}
                                onCancel={handleCancel}
                                okText={"Добавить"}
@@ -62,11 +77,11 @@ const ClientList = (props) => {
                             <span className="app-phone-text">Телефон</span>
                             <span style={{position: "absolute", left: "37%"}}>e-mail</span>
                             <div>
-                                <Input defaultValue={key.phone} addonBefore="+7" style={{width: 160, margin: "10px 0 0 0"}} />
-                                <Input defaultValue={key.email} style={{width: 300, margin: "10px 0 0 7px"}} />
+                                <Input defaultValue={key.phone} onChange={editPhoneChange} addonBefore="+7" style={{width: 160, margin: "10px 0 0 0"}} />
+                                <Input defaultValue={key.email} onChange={editEmailChange} style={{width: 300, margin: "10px 0 0 7px"}} />
                             </div>
                             <p style={{margin: "10px 0 0 0"}}>Ф.И.О.</p>
-                            <Input defaultValue={key.name} style={{margin: "10px 0 0 0", width: 350}} />
+                            <Input defaultValue={key.name} onChange={editClientNameChange} style={{margin: "10px 0 0 0", width: 350}} />
                         </Modal>
                     </>
                     </Col>) : <p>Жители на данный момент отсутствуют.</p>}

@@ -23,7 +23,7 @@ const actions = {
 }
 
 //thunk creator
-export const getClientList = (addressId = 0) => async(dispatch)=>{
+export const getClientList = (addressId) => async(dispatch)=>{
         let data = await clientListApi.getClientList(addressId);
         dispatch(actions.setClientList(data));
 }

@@ -1,4 +1,4 @@
-import {Button, Input, InputNumber, Modal, Select} from "antd";
+import {Button, Input, Modal, Select} from "antd";
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {requestHouseFlats, requestHouses, requestStreets} from "../../redux/addressReducer";
@@ -6,10 +6,10 @@ import "./AddressAndClientList.css"
 import ClientList from "../ClientList/ClientList";
 import {UserAddOutlined} from "@ant-design/icons";
 import 'antd/dist/antd.css';
-import {addClient, bindClient} from "../../redux/clientManagementReducer";
+import {addClient} from "../../redux/clientManagementThunk";
 
 const {Option} = Select;
-
+//todo:refactor repeated code
 const AddressAndClientList = () => {
     const dispatch = useDispatch();
     const [visible, setVisible] = useState(false);
@@ -40,7 +40,7 @@ const AddressAndClientList = () => {
     const showModal = () => {
         setVisible(true);
     };
-    const handleOk = (e) => {
+    const handleOk = () => {
         dispatch(addClient(0, phoneNumber, email, clientName, houseFlatId));
         setConfirmLoading(true);
         setTimeout(() => {
