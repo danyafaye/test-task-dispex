@@ -40,5 +40,9 @@ export const addClient = (id = 0, phone, email, name, addressId) => async (dispa
     let data = await clientManagementApi.addClient(id, phone, email, name, 0);
     dispatch(bindClient(addressId, data.id));
 }
+export const deleteClient = (addressId, id) => async (dispatch) => {
+    await clientManagementApi.deleteClient(id)
+    dispatch(getClientList(addressId))
+}
 
 export default clientManagementReducer;

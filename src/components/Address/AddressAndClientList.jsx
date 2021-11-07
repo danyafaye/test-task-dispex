@@ -115,7 +115,7 @@ const AddressAndClientList = () => {
         <p className="app-address-street">
             {streetName ? <span>ул. {streetName}</span> : ""}
             {houseNumber ? <span>, {houseNumber}</span> : ""}
-            {houseFlatNumber ? <span>, {houseFlatNumber} <Button shape="circle" icon={<UserAddOutlined/>}
+            {houseFlatNumber ? <span>, {houseFlatNumber}<Button style={{margin: "0 0 0 10px"}} shape="circle" icon={<UserAddOutlined/>}
                                                                  onClick={showModal}/></span> : ""}
         </p>
         <>
