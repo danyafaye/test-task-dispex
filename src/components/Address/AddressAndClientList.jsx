@@ -37,16 +37,18 @@ const AddressAndClientList = () => {
     const streets = useSelector(state => state.address.streets);
     const houses = useSelector(state => state.address.houses);
     const houseFlats = useSelector(state => state.address.houseFlats);
-    const clientId = useSelector(state => state.clientManagement.id)
     const showModal = () => {
         setVisible(true);
     };
-    const handleOk = () => {
+    const handleOk = (e) => {
         dispatch(addClient(0, phoneNumber, email, clientName, houseFlatId));
         setConfirmLoading(true);
         setTimeout(() => {
             setVisible(false);
             setConfirmLoading(false);
+            setPhoneNumber("");
+            setClientName("");
+            setEmail("");
         }, 2000);
     };
 
@@ -131,11 +133,11 @@ const AddressAndClientList = () => {
                 <span className="app-phone-text">Телефон</span>
                 <span style={{position: "absolute", left: "37%"}}>e-mail</span>
                 <div>
-                <Input addonBefore="+7" style={{width: 160, margin: "10px 0 0 0"}} onChange={phoneNumberChange}/>
-                <Input style={{width: 300, margin: "10px 0 0 7px"}} onChange={emailChange}/>
+                <Input value={phoneNumber} addonBefore="+7" style={{width: 160, margin: "10px 0 0 0"}} onChange={phoneNumberChange}/>
+                <Input value={email} style={{width: 300, margin: "10px 0 0 7px"}} onChange={emailChange}/>
                 </div>
                 <p style={{margin: "10px 0 0 0"}}>Ф.И.О.</p>
-                <Input style={{margin: "10px 0 0 0", width: 350}} onChange={clientNameChange}/>
+                <Input value={clientName} style={{margin: "10px 0 0 0", width: 350}} onChange={clientNameChange}/>
             </Modal>
         </>
         <ClientList houseFlatId={houseFlatId}/>
